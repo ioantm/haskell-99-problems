@@ -9,3 +9,10 @@ elementAt xs n
 
 myLength :: [x] -> Int
 myLength = foldl (\ acc _ -> acc + 1) 0
+
+myReverse :: [a] -> [a]
+myReverse = foldl (flip(:)) []
+
+myReverse' [] = []
+myReverse' (x:[]) = [x]
+myReverse' (x:xs) = myReverse' xs ++ [x]
