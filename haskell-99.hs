@@ -1,3 +1,4 @@
+import Data.List as L
 --p1
 myLast =  head . reverse
 
@@ -29,3 +30,14 @@ isPalindrome xs = xs == reverse xs
 isPalindrome' [] = True
 isPalindrome' [_] = True
 isPalindrome' (x:xs) = (x == last xs) && (isPalindrome' $ init xs)
+
+--p7
+data NestedList a = Elem a | List [NestedList a]
+
+--p8
+compress [] = []
+compress [x] = [x]
+compress (x:xs) = if x == head xs then compress xs else x:(compress xs)
+
+compress' :: (Eq a) => [a] -> [a]
+compress' =  map head . L.group
