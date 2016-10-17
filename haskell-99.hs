@@ -6,3 +6,6 @@ elementAt [] _ = error "empty list"
 elementAt xs n
   | n < 1 = error "Index out of bounds"
   | otherwise = last . take n $ xs
+
+myLength :: [x] -> Int
+myLength = foldl (\ acc _ -> acc + 1) 0
