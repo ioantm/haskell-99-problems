@@ -41,3 +41,23 @@ compress (x:xs) = if x == head xs then compress xs else x:(compress xs)
 
 compress' :: (Eq a) => [a] -> [a]
 compress' =  map head . L.group
+
+--p9
+pack [] = []
+pack [x] = [[x]]
+pack (x:xs)
+  | x == head currentPack = (x:currentPack) : (tail packed)
+  | otherwise = [x]:packed
+  where packed = pack xs
+        currentPack = head packed
+
+pack' (x:xs) = let (first,rest) = span (==x) xs
+               in (x:first) : pack' rest
+pack' [] = []
+
+pack'' [] = []
+pack'' xx@(x:xs) = (takeWhile (==x) xx) : (pack'' $ dropWhile (==x) xx)
+
+--p10
+encode :: Eq a => [a] -> [(Int, a)]
+encode = map (\x -> (length x, head x)) . pack
