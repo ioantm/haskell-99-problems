@@ -58,6 +58,14 @@ pack' [] = []
 pack'' [] = []
 pack'' xx@(x:xs) = (takeWhile (==x) xx) : (pack'' $ dropWhile (==x) xx)
 
---p10
+--p11
 encode :: Eq a => [a] -> [(Int, a)]
 encode = map (\x -> (length x, head x)) . pack
+
+--p12
+data Encoded a = Multiple Int a | Single a deriving (Show, Eq)
+
+encode' :: Eq a => [a] -> [Encoded a]
+encode' = map(\x -> encodePack x) . pack
+  where encodePack (x:[]) = Single x
+        encodePack xx@(x:xs) = Multiple (length xx) x
